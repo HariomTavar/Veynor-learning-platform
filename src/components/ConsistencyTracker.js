@@ -1,3 +1,4 @@
+// src/components/ConsistencyTracker.js
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Flame } from "lucide-react";
@@ -80,7 +81,7 @@ export default function ConsistencyTracker({ streak, setStreak, totalDays = 30 }
           initial={{ scale: 0.9 }}
           animate={{ scale: 1 }}
           transition={{ duration: 0.4 }}
-          className="inline-block bg-white p-6 rounded-2xl shadow-xl mb-8"
+          className="inline-block bg-white p-6 rounded-2xl shadow-xl mb-8 border border-gray-100"
         >
           <div className="flex items-center justify-center mb-4">
             <Flame size={36} className="text-yellow-500 mr-2 animate-pulse" />
@@ -91,11 +92,10 @@ export default function ConsistencyTracker({ streak, setStreak, totalDays = 30 }
           <button
             onClick={handleMarkDone}
             disabled={todayDone}
-            className={`px-6 py-3 rounded-lg font-semibold text-white transition ${
-              todayDone
+            className={`px-6 py-3 rounded-lg font-semibold text-white transition shadow-md ${todayDone
                 ? "bg-gray-400 cursor-not-allowed"
-                : "bg-blue-500 hover:bg-blue-600"
-            }`}
+                : "bg-blue-500 hover:bg-blue-600 hover:shadow-lg"
+              }`}
           >
             {todayDone ? "Marked Today ✅" : "Mark Today Done"}
           </button>
@@ -106,16 +106,15 @@ export default function ConsistencyTracker({ streak, setStreak, totalDays = 30 }
         </motion.div>
 
         {/* Calendar View */}
-        <div className="grid grid-cols-7 gap-2 justify-center mb-6">
+        <div className="grid grid-cols-7 gap-2 justify-center mb-6 max-w-lg mx-auto">
           {[...Array(totalDays)].map((_, i) => {
             const day = i + 1;
             const completed = completedDays.includes(day);
             return (
               <motion.div
                 key={i}
-                className={`w-10 h-10 flex items-center justify-center rounded-full cursor-pointer ${
-                  completed ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-700"
-                }`}
+                className={`w-10 h-10 flex items-center justify-center rounded-full cursor-pointer text-sm font-medium ${completed ? "bg-blue-500 text-white shadow-md" : "bg-white text-gray-400 border border-gray-200"
+                  }`}
                 whileHover={{ scale: completed ? 1.05 : 1.1 }}
                 onClick={() => !completed && handleMarkDone()}
               >
@@ -126,9 +125,9 @@ export default function ConsistencyTracker({ streak, setStreak, totalDays = 30 }
         </div>
 
         {/* Linear Progress Bar */}
-        <div className="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
+        <div className="w-full bg-gray-200 rounded-full h-4 overflow-hidden max-w-2xl mx-auto">
           <motion.div
-            className="h-4 bg-blue-500"
+            className="h-4 bg-gradient-to-r from-blue-400 to-purple-500"
             initial={{ width: 0 }}
             animate={{ width: `${progressPercent}%` }}
             transition={{ duration: 1.2 }}

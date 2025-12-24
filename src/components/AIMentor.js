@@ -34,10 +34,10 @@ export default function AIMentor() {
   };
 
   return (
-    <section className="relative bg-gradient-to-r from-blue-900 via-purple-800 to-pink-900 text-white py-20 px-6">
+    <section className="relative bg-gradient-to-r from-blue-50 via-purple-50 to-white text-gray-900 py-20 px-6">
       <div className="max-w-3xl mx-auto text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">Your AI Mentor 🤖</h2>
-        <p className="text-lg md:text-xl mb-8">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Your AI Mentor 🤖</h2>
+        <p className="text-lg md:text-xl mb-8 text-gray-600">
           Ask anything and get personalized guidance about your course.
         </p>
 
@@ -48,15 +48,15 @@ export default function AIMentor() {
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
             placeholder="What do you want to learn today?"
-            className="w-full md:w-2/3 px-4 py-3 rounded-lg text-gray-900 font-medium focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="w-full md:w-2/3 px-4 py-3 rounded-lg text-gray-900 bg-white border border-gray-200 font-medium focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
           />
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={getSuggestion}
-            className="bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold shadow-lg hover:bg-blue-600 transition-all"
+            className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold shadow-lg hover:bg-blue-700 transition-all"
           >
-            Ask 
+            Ask
           </motion.button>
         </div>
 
@@ -69,7 +69,7 @@ export default function AIMentor() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="text-lg md:text-xl italic text-yellow-300"
+                className="text-lg md:text-xl italic text-blue-500"
               >
                 🤖 AI is typing......
               </motion.p>
@@ -80,7 +80,7 @@ export default function AIMentor() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="text-lg md:text-xl text-green-200"
+                className="text-lg md:text-xl text-gray-800 bg-white/50 p-4 rounded-xl border border-blue-100 shadow-sm"
               >
                 {answer}
               </motion.p>
@@ -91,17 +91,17 @@ export default function AIMentor() {
         {/* History */}
         {history.length > 0 && (
           <div className="text-left max-w-2xl mx-auto space-y-4">
-            <h3 className="text-xl font-semibold mb-2">History</h3>
+            <h3 className="text-xl font-semibold mb-2 text-gray-800">History</h3>
             {history.map((h, i) => (
               <motion.div
                 key={i}
-                className="bg-white/10 p-3 rounded-lg backdrop-blur-sm"
+                className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: i * 0.1 }}
               >
-                <p className="font-semibold text-yellow-300">Q: {h.question}</p>
-                <p className="text-green-200">A: {h.response}</p>
+                <p className="font-semibold text-blue-600">Q: {h.question}</p>
+                <p className="text-gray-700 mt-1">A: {h.response}</p>
               </motion.div>
             ))}
           </div>

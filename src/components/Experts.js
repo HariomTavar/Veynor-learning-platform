@@ -4,12 +4,11 @@ import { motion } from "framer-motion";
 import { useSwipeable } from "react-swipeable";
 
 const experts = [
-  { name: "Hariom Tavar", role: "Co-founder-veynor", image: "/hariompic.jpg", skills: ["Java","react.js","SQL"] },
+  { name: "Hariom Tavar", role: "Co-founder-veynor", image: "/hariompic.jpg", skills: ["Java", "react.js", "SQL"] },
   { name: "Rohan Mehra", role: "Frontend Engineer", image: "/shree1.jpg", skills: ["React", "CSS", "JavaScript"] },
   { name: "Shreey Kapoor", role: "Data Scientist", image: "/shree2.jpg", skills: ["Data Analysis", "Python", "Pandas"] },
   { name: "Ananya Verma", role: "AI specialist", image: "/shree3.jpg", skills: ["ML", "Deep Learning", "Python"] },
   { name: "Alice Johnson", role: "UI/UX Designer", image: "/shree4.jpg", skills: ["Figma", "Design", "Prototyping"] },
-  
 ];
 
 export default function Experts() {
@@ -45,7 +44,7 @@ export default function Experts() {
       <div
         {...handlers}
         ref={carouselRef}
-        className="flex overflow-x-auto space-x-6 px-6 scrollbar-hide"
+        className="flex overflow-x-auto space-x-6 px-6 scrollbar-hide pb-8"
         style={{
           scrollbarWidth: "none",
           msOverflowStyle: "none",
@@ -55,7 +54,7 @@ export default function Experts() {
           <motion.div
             key={idx}
             whileHover={{ scale: 1.05, rotateY: 5, boxShadow: "0px 10px 30px rgba(59, 130, 246, 0.3)" }}
-            className="relative min-w-[220px] flex-shrink-0 rounded-2xl overflow-hidden cursor-pointer h-[350px]"
+            className="relative min-w-[220px] flex-shrink-0 rounded-2xl overflow-hidden cursor-pointer h-[350px] bg-white shadow-lg border border-gray-100"
             style={{
               backgroundImage: `url(${expert.image})`,
               backgroundSize: "cover",
@@ -63,19 +62,19 @@ export default function Experts() {
             }}
           >
             {/* Overlay for text at bottom */}
-            <div className="absolute bottom-0 left-0 w-full h-full bg-black bg-opacity-30 flex flex-col justify-end p-5 text-white">
+            <div className="absolute bottom-0 left-0 w-full h-full bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-5 text-white">
               <h3 className="text-lg font-semibold">{expert.name}</h3>
-              <p className="text-sm mb-2">{expert.role}</p>
+              <p className="text-sm mb-2 opacity-90">{expert.role}</p>
 
               <div className="flex flex-wrap gap-2 mt-1">
                 {expert.skills.map((skill, i) => (
-                  <span key={i} className="text-xs bg-blue-500 bg-opacity-70 px-2 py-1 rounded-full font-medium">
+                  <span key={i} className="text-xs bg-blue-500/80 px-2 py-1 rounded-full font-medium">
                     {skill}
                   </span>
                 ))}
               </div>
 
-              <button className="mt-4 w-full bg-blue-600 text-white text-sm py-2 rounded-lg hover:bg-blue-500 transition">
+              <button className="mt-4 w-full bg-white text-blue-600 text-sm py-2 rounded-lg hover:bg-gray-100 transition font-semibold">
                 Connect
               </button>
             </div>

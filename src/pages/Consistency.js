@@ -24,69 +24,120 @@ export default function Consistency() {
   useEffect(() => {
     const interval = setInterval(() => {
       setStreak((prev) => (prev < totalDays ? prev + 1 : prev));
-    }, 2500);
+    }, 100); // Faster for demo
     return () => clearInterval(interval);
   }, []);
 
   const progressPercentage = (completedDays / totalDays) * 100;
 
   return (
-    <section className="relative bg-gradient-to-r from-yellow-50 via-blue-50 to-purple-50 py-20 min-h-screen overflow-hidden">
+    <section className="relative bg-gray-50 py-20 min-h-screen overflow-hidden text-gray-900 flex items-center justify-center">
       {completedDays === totalDays && (
         <Confetti width={windowSize.width} height={windowSize.height} />
       )}
 
-      {/* Floating streak icons */}
-      <motion.div
-        className="absolute top-10 left-10 w-12 h-12 bg-yellow-400 rounded-full opacity-30 blur-lg"
-        animate={{ y: [0, 30, 0], x: [0, 15, 0], rotate: [0, 360, 0] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="absolute bottom-10 right-20 w-16 h-16 bg-blue-400 rounded-full opacity-25 blur-2xl"
-        animate={{ y: [0, -25, 0], x: [0, -20, 0], rotate: [0, -360, 0] }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-      />
+      {/* Background Effects */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
+        <div className="absolute top-10 left-10 w-32 h-32 bg-yellow-200 rounded-full blur-[80px] opacity-40"></div>
+        <div className="absolute bottom-10 right-10 w-40 h-40 bg-blue-200 rounded-full blur-[80px] opacity-40"></div>
+      </div>
 
-      <motion.h2
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        className="text-4xl md:text-5xl font-bold text-center text-gray-800 mb-12"
-      >
-        Track Your Learning Consistency
-      </motion.h2>
-
-      <div className="max-w-xl mx-auto text-center px-4">
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
-          className="text-xl text-gray-700 mb-6"
+      <div className="relative z-10 max-w-4xl w-full px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center mb-12"
         >
-          You have completed{" "}
-          <span className="font-semibold text-blue-600">{completedDays}</span> out of{" "}
-          {totalDays} days of learning. 🎯
-        </motion.p>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
+            Consistency is Key 🔑
+          </h2>
+          <p className="text-gray-600 text-lg">
+            Build a habit. Track your progress. Achieve mastery.
+          </p>
+        </motion.div>
 
-        {/* Progress Bar */}
-        <div className="w-full bg-gray-300 rounded-full h-6 overflow-hidden shadow-inner">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          {/* Circular Progress */}
           <motion.div
-            initial={{ width: 0 }}
-            animate={{ width: `${progressPercentage}%` }}
-            transition={{ duration: 1 }}
-            className="bg-blue-500 h-6"
-          />
-        </div>
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="bg-white/80 backdrop-blur-xl p-8 rounded-3xl border border-gray-200 flex flex-col items-center justify-center aspect-square shadow-xl"
+          >
+            <div className="relative w-48 h-48 flex items-center justify-center">
+              <svg className="w-full h-full transform -rotate-90">
+                <circle
+                  cx="50%"
+                  cy="50%"
+                  r="45%"
+                  stroke="currentColor"
+                  strokeWidth="10"
+                  fill="transparent"
+                  className="text-gray-200"
+                />
+                <motion.circle
+                  cx="50%"
+                  cy="50%"
+                  r="45%"
+                  stroke="currentColor"
+                  strokeWidth="10"
+                  fill="transparent"
+                  strokeDasharray="283"
+                  strokeDashoffset={283 - (283 * progressPercentage) / 100}
+                  strokeLinecap="round"
+                  className="text-blue-500"
+                  initial={{ strokeDashoffset: 283 }}
+                  animate={{ strokeDashoffset: 283 - (283 * progressPercentage) / 100 }}
+                  transition={{ duration: 1 }}
+                />
+              </svg>
+              <div className="absolute inset-0 flex flex-col items-center justify-center">
+                <span className="text-5xl font-bold text-gray-900">{completedDays}</span>
+                <span className="text-sm text-gray-500 uppercase tracking-wider">Days</span>
+              </div>
+            </div>
+            <h3 className="mt-6 text-xl font-semibold text-gray-800">Current Streak</h3>
+          </motion.div>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-          className="mt-4 text-gray-600 text-md"
-        >
-          Keep learning daily to maintain your streak and achieve your goals! 🚀
-        </motion.p>
+          {/* Stats Card */}
+          <motion.div
+            initial={{ x: 20, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            className="space-y-6"
+          >
+            <div className="bg-white/80 backdrop-blur-md p-6 rounded-2xl border border-gray-200 shadow-sm">
+              <div className="flex justify-between items-center mb-2">
+                <span className="text-gray-500">Total Goal</span>
+                <span className="text-xl font-bold text-gray-900">{totalDays} Days</span>
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-2">
+                <div className="w-full bg-blue-500/30 h-2 rounded-full"></div>
+              </div>
+            </div>
+
+            <div className="bg-white/80 backdrop-blur-md p-6 rounded-2xl border border-gray-200 shadow-sm">
+              <div className="flex justify-between items-center mb-2">
+                <span className="text-gray-500">Completion</span>
+                <span className="text-xl font-bold text-green-600">{Math.round(progressPercentage)}%</span>
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                <motion.div
+                  className="bg-green-500 h-2 rounded-full"
+                  initial={{ width: 0 }}
+                  animate={{ width: `${progressPercentage}%` }}
+                />
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-r from-purple-500 to-blue-500 p-6 rounded-2xl shadow-lg text-white">
+              <h4 className="font-bold text-lg mb-2">💡 Daily Tip</h4>
+              <p className="text-sm opacity-90">
+                "Small daily improvements are the key to staggering long-term results."
+              </p>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

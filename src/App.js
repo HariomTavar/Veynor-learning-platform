@@ -7,7 +7,8 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Roadmaps from "./pages/Roadmaps";
 import Consistency from "./pages/Consistency";
-import About from "./pages/About";
+import Experts from "./pages/Experts";
+import Profile from "./pages/Profile";
 import AIGuide from "./pages/AIGuide";
 
 function App() {
@@ -23,8 +24,9 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/roadmaps" element={<Roadmaps />} />
             <Route path="/consistency" element={<Consistency />} />
-            <Route path="/about" element={<About />} />
             <Route path="/aiguide" element={<AIGuide />} />
+            <Route path="/experts" element={<Experts />} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
         </div>
 
