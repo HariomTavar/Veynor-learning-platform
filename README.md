@@ -77,8 +77,8 @@ Lucide Icons
 
 Axios
 
-Backend
-
+Backend 
+Spring boot
 Node.js
 
 Express.js
